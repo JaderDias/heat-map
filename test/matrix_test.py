@@ -31,6 +31,23 @@ class GetTests(unittest.TestCase):
             actual = matrix.Get(target, test[0])
             self.assertEqual(test[1], actual)
 
+class SetTests(unittest.TestCase):
+    def testDimension1(self):
+        target = [0, 1, 3, 4]
+        input = [([0], 1), ([2], 6)]
+        expected = [[1, 1, 3, 4], [1, 1, 6, 4]]
+        for test in zip(input, expected):
+            matrix.Set(target, test[0][0], test[0][1])
+            self.assertEqual(test[1], target)
+    def testDimension2(self):
+        target = [[0, 1], [3, 5], [-1, -2]]
+        input = [([0, 0], 1), ([2, 1], 2), ([1, 1], 3)]
+        expected = [[[1, 1], [3, 5], [-1, -2]],
+                    [[1, 1], [3, 5], [-1, 2]],
+                    [[1, 1], [3, 3], [-1, 2]]]
+        for test in zip(input, expected):
+            matrix.Set(target, test[0][0], test[0][1])
+            self.assertEqual(test[1], target)
 
 if __name__ == "__main__":
     unittest.main()
