@@ -1,34 +1,34 @@
 import unittest
 from heat_map import matrix
 
-class CreateTests(unittest.TestCase):
+class create(unittest.TestCase):
     def testDimension1(self):
         input = [[0], [1], [2]]
         expected = [[], [0], [0, 0]]
         for test in zip(input, expected):
-            actual = matrix.Create(test[0], 0)
+            actual = matrix.create(test[0], 0)
             self.assertEqual(test[1], actual)
     def testDimension2(self):
         input = [[0, 0], [0, 1], [1, 2]]
         expected = [[], [[]], [[0], [0]]]
         for test in zip(input, expected):
-            actual = matrix.Create(test[0], 0)
+            actual = matrix.create(test[0], 0)
             self.assertEqual(test[1], actual)
 
-class GetTests(unittest.TestCase):
+class get(unittest.TestCase):
     def testDimension1(self):
         target = [0, 1, 3, 4]
         input = [[0], [1], [3]]
         expected = [0, 1, 4]
         for test in zip(input, expected):
-            actual = matrix.Get(target, test[0])
+            actual = matrix.get(target, test[0])
             self.assertEqual(test[1], actual)
     def testDimension2(self):
         target = [[0, 1], [3, 5], [-1, -2]]
         input = [[0, 0], [2, 1], [1, 1]]
         expected = [0, -2, 5]
         for test in zip(input, expected):
-            actual = matrix.Get(target, test[0])
+            actual = matrix.get(target, test[0])
             self.assertEqual(test[1], actual)
 
 class SetTests(unittest.TestCase):
@@ -37,7 +37,7 @@ class SetTests(unittest.TestCase):
         input = [([0], 1), ([2], 6)]
         expected = [[1, 1, 3, 4], [1, 1, 6, 4]]
         for test in zip(input, expected):
-            matrix.Set(target, test[0][0], test[0][1])
+            matrix.set(target, test[0][0], test[0][1])
             self.assertEqual(test[1], target)
     def testDimension2(self):
         target = [[0, 1], [3, 5], [-1, -2]]
@@ -46,7 +46,7 @@ class SetTests(unittest.TestCase):
                     [[1, 1], [3, 5], [-1, 2]],
                     [[1, 1], [3, 3], [-1, 2]]]
         for test in zip(input, expected):
-            matrix.Set(target, test[0][0], test[0][1])
+            matrix.set(target, test[0][0], test[0][1])
             self.assertEqual(test[1], target)
 
 class FlattenTests(unittest.TestCase):
