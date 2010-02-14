@@ -11,10 +11,16 @@ class GetDistanceTests(unittest.TestCase):
             actual = point.GetDistance(pointA, test[0])
             self.assertEqual(test[1], actual)
     def testDimension2(self):
-        sqrt2 = math.sqrt(2)
         pointA = [1, 1]
         pointB = [[0, 0], [1, 1], [2, 1], [-1, 1]]
-        expected = [sqrt2, 0, 1, 2]
+        expected = [math.sqrt(2), 0, 1, 2]
+        for test in zip(pointB, expected):
+            actual = point.GetDistance(pointA, test[0])
+            self.assertEqual(test[1], actual)
+    def testDimension3(self):
+        pointA = [1, 1, 1]
+        pointB = [[0, 0, 0], [1, 1, 1], [2, 1, 0], [-1, 1, 0]]
+        expected = [math.sqrt(3), 0, math.sqrt(2), math.sqrt(5)]
         for test in zip(pointB, expected):
             actual = point.GetDistance(pointA, test[0])
             self.assertEqual(test[1], actual)
