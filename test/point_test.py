@@ -18,6 +18,3 @@ class GetDistanceTests(unittest.TestCase):
         for test in zip(pointB, expected):
             actual = point.GetDistance(pointA, test[0])
             self.assertEqual(test[1], actual)
-
-if __name__ == "__main__":
-    unittest.main()

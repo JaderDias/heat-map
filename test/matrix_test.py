@@ -48,6 +48,3 @@ class SetTests(unittest.TestCase):
         for test in zip(input, expected):
             matrix.Set(target, test[0][0], test[0][1])
             self.assertEqual(test[1], target)
-
-if __name__ == "__main__":
-    unittest.main()
