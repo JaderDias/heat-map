@@ -48,3 +48,16 @@ class SetTests(unittest.TestCase):
         for test in zip(input, expected):
             matrix.Set(target, test[0][0], test[0][1])
             self.assertEqual(test[1], target)
+
+class FlattenTests(unittest.TestCase):
+    def testDimension1(self):
+        target = [0, 1, 3, 4]
+        expected = [([0], 0), ([1], 1), ([2], 3), ([3], 4)]
+        actual = matrix.flatten(target)
+        self.assertEqual(expected, actual)
+    def testDimension2(self):
+        target = [[0, 1], [3, 4]]
+        expected = [([0, 0], 0), ([0, 1], 1), ([1, 0], 3), ([1, 1], 4)]
+        actual = matrix.flatten(target)
+        self.assertEqual(expected, actual)
+
