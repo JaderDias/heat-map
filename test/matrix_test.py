@@ -61,3 +61,10 @@ class ToDictionary(unittest.TestCase):
         actual = matrix.to_dictionary(target)
         self.assertEqual(expected, actual)
 
+class GetDimensions(unittest.TestCase):
+    def test(self):
+        target = [[], [[]], [[], []], [[0], [0]]]
+        expected = [[0], [1, 0], [2, 0], [2, 1]]
+        for test in zip(target, expected):
+            actual = matrix.get_dimensions(test[0])
+            self.assertEqual(test[1], actual)

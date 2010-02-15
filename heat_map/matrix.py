@@ -26,3 +26,9 @@ def to_dictionary(matrix, position = []):
         else:
             result[tuple(currentPosition)] = currentItem
     return result
+
+def get_dimensions(matrix):
+    result = [len(matrix)]
+    if result[0] > 0 and isinstance(matrix[0], list):
+            result.extend(get_dimensions(matrix[0]))
+    return result
