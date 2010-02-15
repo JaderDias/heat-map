@@ -1,7 +1,7 @@
 import unittest
 from heat_map import matrix
 
-class create(unittest.TestCase):
+class Create(unittest.TestCase):
     def testDimension1(self):
         input = [[0], [1], [2]]
         expected = [[], [0], [0, 0]]
@@ -15,7 +15,7 @@ class create(unittest.TestCase):
             actual = matrix.create(test[0], 0)
             self.assertEqual(test[1], actual)
 
-class get(unittest.TestCase):
+class Get(unittest.TestCase):
     def testDimension1(self):
         target = [0, 1, 3, 4]
         input = [[0], [1], [3]]
@@ -31,7 +31,7 @@ class get(unittest.TestCase):
             actual = matrix.get(target, test[0])
             self.assertEqual(test[1], actual)
 
-class SetTests(unittest.TestCase):
+class Set(unittest.TestCase):
     def testDimension1(self):
         target = [0, 1, 3, 4]
         input = [([0], 1), ([2], 6)]
@@ -49,15 +49,15 @@ class SetTests(unittest.TestCase):
             matrix.set(target, test[0][0], test[0][1])
             self.assertEqual(test[1], target)
 
-class FlattenTests(unittest.TestCase):
+class ToDictionary(unittest.TestCase):
     def testDimension1(self):
         target = [0, 1, 3, 4]
-        expected = [([0], 0), ([1], 1), ([2], 3), ([3], 4)]
-        actual = matrix.flatten(target)
+        expected = {(0,): 0, (1,): 1, (2,): 3, (3,): 4}
+        actual = matrix.to_dictionary(target)
         self.assertEqual(expected, actual)
     def testDimension2(self):
         target = [[0, 1], [3, 4]]
-        expected = [([0, 0], 0), ([0, 1], 1), ([1, 0], 3), ([1, 1], 4)]
-        actual = matrix.flatten(target)
+        expected = {(0, 0): 0, (0, 1): 1, (1, 0): 3, (1, 1): 4}
+        actual = matrix.to_dictionary(target)
         self.assertEqual(expected, actual)
 

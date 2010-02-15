@@ -15,14 +15,14 @@ def set(matrix, position, value):
         matrix = matrix[index]
     matrix[position[-1]] = value
 
-def flatten(matrix, position = []):
-    result = []
+def to_dictionary(matrix, position = []):
+    result = {}
     for i in range(0, len(matrix)):
         currentItem = matrix[i]
         currentPosition = position + [i]
         if hasattr(currentItem, "__iter__") \
            and not isinstance(currentItem, basestring):
-            result.extend(flatten(currentItem, currentPosition))
+            result.update(to_dictionary(currentItem, currentPosition))
         else:
-            result.append((currentPosition, currentItem))
+            result[tuple(currentPosition)] = currentItem
     return result

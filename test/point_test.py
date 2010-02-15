@@ -2,7 +2,7 @@ import unittest
 import math
 from heat_map import point
 
-class get_distance(unittest.TestCase):
+class GetDistance(unittest.TestCase):
     def testDimension1(self):
         pointA = [0]
         pointB = [[0], [1], [2], [-1]]

@@ -1,9 +1,15 @@
 import math
+import operator
 import matrix
 import point
 
-def paint(target, center, peak):
-    for item in matrix.flatten(target):
-        distance = point.get_distance(center, item[0])
-        intensity = math.pow(2, -distance) # alternative to 1 / math.pow(1 + distance, 2)
-        matrix.set(target, item[0], intensity)
+def wave_dispersion(distance):
+    return 1 / math.pow(1 + distance, 2)
+
+def paint(target, center, peak, dispersion = wave_dispersion, overlay = operator.add):
+    dictionary = matrix.to_dictionary(target)
+    for (key, value) in dictionary.iteritems():
+        distance = point.get_distance(center, key)
+        intensity = peak * dispersion(distance)
+        intensity = overlay(value, intensity)
+        matrix.set(target, key, intensity)
