@@ -49,6 +49,18 @@ class Set(unittest.TestCase):
             matrix.set(target, test[0][0], test[0][1])
             self.assertEqual(test[1], target)
 
+class Flatten(unittest.TestCase):
+    def testDimension1(self):
+        target = [0, 1, 3, 4]
+        expected = [0, 1, 3, 4]
+        actual = matrix.flatten(target)
+        self.assertEqual(expected, actual)
+    def testDimension2(self):
+        target = [[0, 1], [3, 4]]
+        expected = [0, 1, 3, 4]
+        actual = matrix.flatten(target)
+        self.assertEqual(expected, actual)
+
 class ToDictionary(unittest.TestCase):
     def testDimension1(self):
         target = [0, 1, 3, 4]
@@ -62,9 +74,24 @@ class ToDictionary(unittest.TestCase):
         self.assertEqual(expected, actual)
 
 class GetDimensions(unittest.TestCase):
-    def test(self):
+    def testList(self):
         target = [[], [[]], [[], []], [[0], [0]]]
         expected = [[0], [1, 0], [2, 0], [2, 1]]
         for test in zip(target, expected):
             actual = matrix.get_dimensions(test[0])
             self.assertEqual(test[1], actual)
+    def testTuple(self):
+        target = [tuple([]), ([],), ([], []), ([0], [0])]
+        expected = [[0], [1, 0], [2, 0], [2, 1]]
+        for test in zip(target, expected):
+            actual = matrix.get_dimensions(test[0])
+            self.assertEqual(test[1], actual)
+
+class ToImage(unittest.TestCase):
+    def test(self):
+        target = [[0, 127], [127, -1]]
+        expected = {(0, 0): 0, (0, 1): 127, (1, 0) :127, (1, 1): 255}
+        actual = matrix.to_image(target)
+        for key, value in expected.iteritems():
+            self.assertEqual(value, actual.getpixel(key))
+
