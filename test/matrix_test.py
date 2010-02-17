@@ -60,6 +60,11 @@ class Flatten(unittest.TestCase):
         expected = [0, 1, 3, 4]
         actual = matrix.flatten(target)
         self.assertEqual(expected, actual)
+    def testDimension2Tuple(self):
+        target = [(0, (1, 2)), ((3, 5), 4)]
+        expected = [0, 1, 2, 3, 5, 4]
+        actual = matrix.flatten(target)
+        self.assertEqual(expected, actual)
 
 class ToDictionary(unittest.TestCase):
     def testDimension1(self):
