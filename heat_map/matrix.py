@@ -1,6 +1,5 @@
 import copy
 import struct
-import unittest
 from PIL import Image
 
 def create(dimensions, item):
