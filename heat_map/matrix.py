@@ -1,6 +1,9 @@
 import copy
 import struct
-from PIL import Image
+try:
+    from PIL import Image
+except ImportError:
+    from google.appengine.api import images
 
 def create(dimensions, item):
     for dimension in dimensions:
