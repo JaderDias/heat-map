@@ -70,7 +70,9 @@ def normalize(matrix, max_value):
     dic = to_dictionary(matrix)
     for key, value in dic.iteritems():
         result = round(factor * value)
-        if result > 127:
+        if result > 255:
+            result = -1
+        elif result > 127:
             result -= 256
         set(matrix, key, result)
     return matrix

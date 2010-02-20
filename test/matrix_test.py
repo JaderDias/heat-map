@@ -102,8 +102,8 @@ class ToImage(unittest.TestCase):
 
 class Normalize(unittest.TestCase):
     def test(self):
-        target = [[0, 1], [2, 3]]
+        target = [[0, 1, 2], [3, 6, 7]]
         max_value = 6
-        expected = [[0, 43], [85, -128]]
+        expected = [[0, 43, 85], [-128, -1, -1]]
         actual = matrix.normalize(target, max_value)
         matrix.assertFlattenAlmostEqual(self, expected, actual)
