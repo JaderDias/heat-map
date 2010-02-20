@@ -92,18 +92,17 @@ class GetDimensions(unittest.TestCase):
             actual = matrix.get_dimensions(test[0])
             self.assertEqual(test[1], actual)
 
-class ToImage(unittest.TestCase):
+class ToPNGCanvas(unittest.TestCase):
     def test(self):
-        target = [[0, 127], [127, -1]]
-        expected = {(0, 0): 0, (0, 1): 127, (1, 0) :127, (1, 1): 255}
-        actual = matrix.to_image(target)
-        for key, value in expected.iteritems():
-            self.assertEqual(value, actual.getpixel(key))
+        target = [[0, 127], [127, 255]]
+        expected = [[[0] * 4, [127] * 4], [[127] * 4, [255] * 4]]
+        actual = matrix.to_PNGCanvas(target)
+        matrix.assertFlattenAlmostEqual(self, expected, actual.canvas)
 
 class Normalize(unittest.TestCase):
     def test(self):
         target = [[0, 1, 2], [3, 6, 7]]
         max_value = 6
-        expected = [[0, 43, 85], [-128, -1, -1]]
+        expected = [[0, 43, 85], [128, 255, 255]]
         actual = matrix.normalize(target, max_value)
         matrix.assertFlattenAlmostEqual(self, expected, actual)

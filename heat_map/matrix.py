@@ -1,6 +1,5 @@
 import copy
-import struct
-from PIL import Image
+from pngcanvas import PNGCanvas
 
 def create(dimensions, item):
     for dimension in dimensions:
@@ -47,12 +46,11 @@ def get_dimensions(matrix):
             break
     return result
 
-def to_image(matrix):
-    mode = 'P' #8bpp
+def to_PNGCanvas(matrix):
     size = get_dimensions(matrix)
-    flattened = flatten(matrix)
-    data = struct.pack('b' * len(flattened), *flattened)
-    image = Image.frombuffer(mode, size, data, 'raw', mode, 0, 1)
+    image = PNGCanvas(size[0], size[1], bgcolor = [0, 0, 0, 0])
+    for key, value in to_dictionary(matrix).iteritems():
+        set(image.canvas, key, [value, value, value, value])
     return image
 
 def assertFlattenAlmostEqual(test_case, expected, actual):
@@ -67,8 +65,6 @@ def normalize(matrix, max_value):
     for key, value in dic.iteritems():
         result = round(factor * value)
         if result > 255:
-            result = -1
-        elif result > 127:
-            result -= 256
+            result = 255
         set(matrix, key, result)
     return matrix
