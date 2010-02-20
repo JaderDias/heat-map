@@ -2,12 +2,6 @@ import unittest
 from heat_map import matrix
 from heat_map import mercator_projection
 
-def assertFlattenAlmostEqual(test_case, expected, actual):
-    expected = matrix.flatten(expected)
-    actual = matrix.flatten(actual)
-    for item in zip(expected, actual):
-        test_case.assertAlmostEqual(item[0], item[1])
-
 class ToPixel(unittest.TestCase):
     def test(self):
         input = [
@@ -26,7 +20,7 @@ class ToPixel(unittest.TestCase):
                    ]
         for test in zip(input, expected):
             actual = mercator_projection.to_pixel(test[0][0], test[0][1], test[0][2])
-            assertFlattenAlmostEqual(self, test[1], actual)
+            matrix.assertFlattenAlmostEqual(self, test[1], actual)
 
 class ToWGS84(unittest.TestCase):
     def test(self):
@@ -46,7 +40,7 @@ class ToWGS84(unittest.TestCase):
                    ]
         for test in zip(input, expected):
             actual = mercator_projection.to_wgs84(test[0][0], test[0][1], test[0][2])
-            assertFlattenAlmostEqual(self, test[1], actual)
+            matrix.assertFlattenAlmostEqual(self, test[1], actual)
 
 class GetExtent(unittest.TestCase):
     def test(self):
@@ -60,4 +54,4 @@ class GetExtent(unittest.TestCase):
                    ]
         for test in zip(input, expected):
             actual = mercator_projection.get_extent(test[0][0], test[0][1], test[0][2])
-            assertFlattenAlmostEqual(self, test[1], actual)
+            matrix.assertFlattenAlmostEqual(self, test[1], actual)

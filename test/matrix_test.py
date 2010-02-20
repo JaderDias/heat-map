@@ -100,3 +100,10 @@ class ToImage(unittest.TestCase):
         for key, value in expected.iteritems():
             self.assertEqual(value, actual.getpixel(key))
 
+class Normalize(unittest.TestCase):
+    def test(self):
+        target = [[0, 1], [2, 3]]
+        max_value = 6
+        expected = [[0, 43], [85, -128]]
+        actual = matrix.normalize(target, max_value)
+        matrix.assertFlattenAlmostEqual(self, expected, actual)

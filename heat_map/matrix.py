@@ -1,5 +1,6 @@
 import copy
 import struct
+import unittest
 try:
     from PIL import Image
 except ImportError:
@@ -57,3 +58,19 @@ def to_image(matrix):
     data = struct.pack('b' * len(flattened), *flattened)
     image = Image.frombuffer(mode, size, data, 'raw', mode, 0, 1)
     return image
+
+def assertFlattenAlmostEqual(test_case, expected, actual):
+    expected = flatten(expected)
+    actual = flatten(actual)
+    for item in zip(expected, actual):
+        test_case.assertAlmostEqual(item[0], item[1])
+
+def normalize(matrix, max_value):
+    factor = 255.0 / max_value
+    dic = to_dictionary(matrix)
+    for key, value in dic.iteritems():
+        result = round(factor * value)
+        if result > 127:
+            result -= 256
+        set(matrix, key, result)
+    return matrix
