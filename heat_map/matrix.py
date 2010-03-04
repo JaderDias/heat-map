@@ -63,7 +63,7 @@ def normalize(matrix, max_value):
     factor = 255.0 / max_value
     dic = to_dictionary(matrix)
     for key, value in dic.iteritems():
-        result = round(factor * value)
+        result = int(round(factor * value))
         if result > 255:
             result = 255
         set(matrix, key, result)
