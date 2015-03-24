@@ -1,0 +1,1 @@
+Renders tile ready heat maps
